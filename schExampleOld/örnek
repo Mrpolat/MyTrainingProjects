@@ -1,0 +1,47 @@
+Product Type:
+Product ID:
+Long Description:PM5630-2ETH:AC500, 
+Programmable Logic Controller 8MB, 24VDC, 2xETHERNET, 1xRS232/485, CAN, SD-Card Slot, 
+LCD Display
+Invoice Description:PM5630-2ETH:AC500,CPU,8MkB,24VDC,ETH
+power supply
+protocol
+
+
+func getHTML(url string) string {
+
+	resp, _ := http.Get(url) //http kütüphanesinin get metodu kullanılırak girilen url okunuyor 
+	bytes, _ := ioutil.ReadAll(resp.Body)// response değerinin body metodu kullanılarak ioutil kütüphanesi ile byte olarak okunuyor 
+
+	resp.Body.Close()
+
+    return string(bytes)
+
+}
+
+func File(){
+ 
+    
+    content:= getHTML("https://www.se.com/tr/tr/product-range/1468-modicon-m340/?filter=business-1-endüstriyel-otomasyon-ve-kontrol")
+    fmt.Print("************\n")
+    fmt.Print("Metin: ")
+    fmt.Print("************\n")
+
+  
+    // Dosyaya verilecek isim için adını ve uzantısını belirle.
+    ext := ".txt"
+    fileName := "./dummy-" +  ext
+    // Dosyayı oluştur.
+    file, err := os.Create(fileName)
+    // Bir hata oluşursa err dolu gelecek, onu checkError() metoduna gönder.
+    checkError(err)
+    // Dosyayı serbest bırak.
+    defer file.Close()
+ 
+    // Oluşturulan dosyaya kullanıcıdan alınan metni yaz.
+    ln, err := io.WriteString(file, content)
+    checkError(err)
+ 
+    fmt.Printf("Dosyada %v karakter var.", ln)// işin süs kısmı
+   
+}
